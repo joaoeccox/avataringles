@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converse com o Avatar</title>
+    <script src="https://unpkg.com/@inworld/web-sdk@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        #avatar-container {
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Converse com o Avatar</h1>
+    <div id="avatar-container">
+        <p>O avatar responderá automaticamente. Fale algo!</p>
+        <button onclick="startConversation()">Iniciar Conversa</button>
+        <p id="response"></p>
+    </div>
+    
+    <script>
+        async function startConversation() {
+            const client = new InworldClient();
+            client.setApiKey('SUA-CHAVE-API'); // Substitua pela sua chave de API do Inworld
+            client.setScene('SUA-CENA'); // Substitua pelo ID da cena do seu avatar
+            
+            const connection = await client.build();
+            
+            const response = await connection.sendText('Olá!');
+            document.getElementById('response').innerText = response.text;
+        }
+    </script>
+</body>
+</html>
